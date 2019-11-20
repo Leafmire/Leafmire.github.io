@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+   
+    <head>
+        <title>회원등록 </title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="join2.css">
+    </head>
+    <body>
+     <!-- Header -->
+        <header id="header">
+            <a class="logo"><strong>회원등록</strong></a>
+           
+        </header>   
+        <form action="happyjoin.html">
+      
+            이름:<input type="text" name"username"><br>
+            나이:<input type="text" name"age"><br>
+            아이디:<input type="text" name"ID"><br>
+            비밀번호:<input type="password" name"userpw">
+            비밀번호 재확인: <input type="password" name"reuserpw">
+            이메일:<input type="text" name="emailid">@
+                <select name="emaildomain">
+                    <option>naver.com</option>
+                    <option>google.com</option>
+                    <option>daum.net</option>
+                    <option>hoseo.edu</option>
+                </select><br> 
+                
+            <br>
+
+
+            자기소개  <br><textarea name="myintro" rows="5" cols="80"></textarea><br>
+            파일첨부  <input type="file" name="fileupload"> *5M까지 가능<br>
+            <hr>
+                <button type="submit">제출 </button> 
+                <button type="reset">초기화 </button>
+
+        </form>
+        </body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		
+		<meta charset="utf-8" />
+		<link href="assets/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="assets/css/jquery-ui-1.10.2.custom.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="assets/css/stream.css" media="screen" rel="stylesheet" type="text/css">
+    <script src="assets/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-ui-1.10.2.custom.min.js" type="text/javascript"></script>
+    <script src="dist/filter.js" type="text/javascript"></script>
+    <script src="data/movies.js" type="text/javascript"></script>
+    <script src="pagination.js" type="text/javascript"></script>
+	
+	
+		<!-- Scripts -->
+			
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			
+			<script src="assets/js/main.js"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		<link rel="stylesheet" href="assets/css/main.css" />
+	
+		<title>알아야산다-칼로리편</title>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="http://ekwkqdk007.dothome.co.kr/html5/generic.html" class="logo" style="font-family: 나눔고딕;"><strong>알아야 산다</strong> 칼로리편</a>
+									<ul class="icons">
+										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>칼로리별 요리</h1>
+									</header>
+
+
+
+	 
+	<div class="col-md-9">
+      <div class="row2">
+        <div class="content col-md-12">
+          <div id="pagination" class="movies-pagination col-md-9"></div>
+          <div class="col-md-3 content">
+            Per Page: <span id="per_page" class="content"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="movies row" id="movies"> </div>
+    </div>
+<!-- /.col-md-9 -->
+
+
+
+<!-- /.container -->									
+<script id="movie-template" type="text/html">
+        <div class="col-md-4 movie">
+          <div class="thumbnail">
+            <span class="label label-success rating"><%= rating %>
+            <i class="glyphicon glyphicon-star"></i>
+          </span>
+          <div class="caption">
+            <h4><%= _fid %>. <%= name %></h4>
+            <div class="outline">
+              <%= outline %>
+              <span class="runtime">
+                <i class="glyphicon glyphicon-time"></i>
+                <%= runtime %> Kcal
+              </span>
+            </div>
+            <div class="detail">
+              <dl>
+                <dt>
+                  <a href="<%= link %>"><img src= "<%= image %>" style="max-width: 100%;  height: auto;"/></a>
+                </dt>
+                <dt>재료</dt>
+              
+                <dd>
+                  <%= genre %>
+               </dd>
+               
+                
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+      </script>
+    
+							
+								</section>
+
+						</div>
+					</div>
+					
+					
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+							 <div class="container">
+      <h1 class="title">요리 검색</h1>
+      <div class="sidebar col-md-3">
+        <div>
+          <h4 class='col-md-6'>Cooks (<span id="total_movies">0</span>)</h4>
+          <div class="col-md-6 progress">
+            <div class="progress-bar" id="stream_progress" style="width: 0%;">0%</div>
+          </div>
+        </div>
+        <div>
+          <label class="sr-only" for="searchbox">Search</label>
+          <input type="text" class="form-control" id="searchbox" placeholder="Search &hellip;" autocomplete="off">
+          <span class="glyphicon glyphicon-search search-icon"></span>
+        </div>
+        <br>
+        <div class="well">
+            <fieldset id="rating_criteria">
+                <legend>Rating</legend> <span id="rating_range_label" class="slider-label">8 - 10</span>
+                <div id="rating_slider" class="slider">
+   </div>
+                <input type="hidden" id="rating_filter" value="8-10">
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset id="runtime_criteria">
+                <legend>Kcal</legend> <span id="runtime_range_label" class="slider-label">0 Kcal - 2000 Kcal</span>
+                <div id="runtime_slider" class="slider">
+                </div>
+                <input type="hidden" id="runtime_filter" value="0-2000">
+            </fieldset>
+        </div>
+        <div class="well">
+            <fieldset id="year_criteria">
+                <legend>Year</legend>
+                <select class="form-control" id="year_filter">
+                    <option value="all">All</option>
+                    <option value="0-2">한식</option>
+                    <option value="3-5">중식</option>
+                    <option value="6-8">양식</option>
+                    <option value="9-11">일식</option>
+                    <option value="12-14">기타</option>
+                    
+                </select>
+            </fieldset>
+        </div>
+				<div class="well">
+            <fieldset id="genre_criteria">
+                <legend>Genre</legend>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="All" id="all_genre">
+                    <span>All</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="김치">
+                    <span>김치<span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="돼지고기">
+                    <span>돼지고기</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="계란">
+                    <span>계란</span> 
+                   </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="소고기">
+                    <span> 소고기 </span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" value="닭고기">
+                    <span> 닭고기 </span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" value="밀가루">
+                    <span> 밀가루 </span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" value="인스턴트/스낵">
+                    <span> 인스턴트/스낵 </span>
+                  </label>
+                </div>
+            </fieldset>
+        </div>
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="http://ekwkqdk007.dothome.co.kr/html5/index.html" style="font-family: 나눔고딕;">Homepage</a></li>
+										<li><a href="http://ekwkqdk007.dothome.co.kr/html5/generic.html" style="font-family: 나눔고딕;">칼로리별 검색</a></li>
+			
+										<li>
+											<span class="opener"style="font-family: 나눔고딕;">게시판</span>
+											<ul>
+												<li><a href="http://ekwkqdk007.dothome.co.kr/html5/lightbox-master/imagegallary/Freetalk.html"style="font-family: 나눔고딕;">자유게시판</a></li>
+												<li><a href="http://ekwkqdk007.dothome.co.kr/html5/lightbox-master/imagegallary/gallary.html"style="font-family: 나눔고딕;">포토갤러리</a></li>
+												
+												<li><a href="http://ekwkqdk007.dothome.co.kr/html5/lightbox-master/imagegallary/myrecipe.html"style="font-family: 나눔고딕;">나만의레시피</a></li>
+											</ul>
+										</li>
+										<li><a href="http://ekwkqdk007.dothome.co.kr/html5/HallofFame.html"style="font-family: 나눔고딕;">명예의 전당</a></li>
+										
+										
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>오늘의 추천 요리</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="http://terms.naver.com/entry.nhn?docId=1988134&cid=48163&categoryId=48201" class="image" target="_blank"><img src="images/김치찌개.jpg" alt="" /></a>
+											<p>요즘처럼 경기가 안 좋을 때, 답답한 가슴 속까지 확 뚫어주는 얼큰한 김치찌개 생각나시죠? 어머니가 해주시던 깊은 그 맛으로 오늘 하루 속 시원하게 시작하세요.</p>
+										</article>
+										<article>
+											<a href="http://terms.naver.com/entry.nhn?docId=1991535&tkFrom=tlist&tkListId=114389&tkTocId=175326&tkSort=&cid=48163&categoryId=48200" class="image" target="_blank"><img src="images/매생이국.jpg" alt="" /></a>
+											<p>5대 영양소가 골고루 들어있는 매생이는 식이섬유 함량이 많아 다이어트에 도움이 됩니다.</p>
+										</article>
+										<article>
+											<a href="http://terms.naver.com/entry.nhn?docId=1988202&cid=48162&categoryId=48198" class="image" target="_blank"><img src="images/볶음우동.jpg" alt="" /></a>
+											<p>여러 가지 채소를 넣어 매콤한 양념에 볶아 먹는 볶음우동입니다. </p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									
+									<ul class="contact">
+										<li class="fa-envelope-o"><a href="#">araboza_kcal@gmail.com</a></li>
+										<li class="fa-phone">(000) 000-0000</li>
+										<li class="fa-home">1234 Somewhere Road #8254<br />
+										TN 00000-0000</li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; 알아야산다. All rights reserved.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+			</div>
+			</div>
+			
+
+	</body>
+</html>
